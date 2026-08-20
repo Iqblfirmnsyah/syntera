@@ -816,7 +816,7 @@ const mahasiswa = [
         panggilan: "Rafael",
         gender: "male",
         pengurus: true,
-        foto: "../assets/img/mahasiswa/nofoto.jpeg",
+        foto: "../assets/img/mahasiswa/rafael.jpeg",
         instagram: "https://instagram.com/rafaeadri_",
         linkedin: "https://linkedin.com/"
     },
