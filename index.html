@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SYNTERA — Angkatan 2025 · Rekayasa Sistem Komputer UNTAN</title>
+<link rel="icon" href="assets/logo.png"
+
+<meta name="description" content="Situs resmi Angkatan SYNTERA 2025 — direktori mahasiswa, agenda akademik, berita, event, dan galeri.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Tailwind (utility framework) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: { 950:'#0A1420', 900:'#0F1B2E', 800:'#16283F', 700:'#1E3550', 600:'#2A4766' },
+          gold: { 400:'#C7BBB2', 500:'#B4A59B', 600:'#9C8C82' },
+          teal: { 600:'#1B7A72', 700:'#155F59', 800:'#0F433F' },
+          cream: '#F7F4EC',
+          ink: '#16202E',
+          coral: '#C1502E',
+        },
+        fontFamily: {
+          display: ['Fraunces','serif'],
+          body: ['"Plus Jakarta Sans"','sans-serif'],
+          mono: ['"JetBrains Mono"','monospace'],
+        },
+      }
+    }
+  }
+</script>
+
+<!-- Custom stylesheet -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="antialiased" data-page="index">
+
+<div id="horizon-progress"></div>
+
+<!-- ============ NAVBAR ============ -->
+<header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-colors duration-300">
+  <nav class="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between h-20">
+    <a href="index.html" class="flex items-center gap-3 group">
+      <img src="assets/logo.png" width="50" height="50" alt="logo">
+      <span class="font-display font-semibold text-lg md:text-xl tracking-wide text-cream">SYNTERA<span class="text-gold-400">'25</span></span>
+    </a>
+
+    <div class="hidden lg:flex items-center gap-9 font-medium text-sm text-cream/90">
+      <a href="index.html" class="nav-link active" data-page="index">Beranda</a>
+      <a href="pages/tentang.html" class="nav-link" data-page="tentang">Tentang</a>
+      <a href="pages/mahasiswa.html" class="nav-link" data-page="mahasiswa">Direktori</a>
+      <a href="pages/timeline.html" class="nav-link" data-page="timeline">Akademik</a>
+      <a href="pages/berita.html" class="nav-link" data-page="berita">Berita</a>
+      <a href="pages/event.html" class="nav-link" data-page="event">Event</a>
+      <a href="pages/galeri.html" class="nav-link" data-page="galeri">Galeri</a>
+    </div>
+
+    <a href="pages/mahasiswa.html" class="hidden lg:inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-400 text-navy-950 font-semibold text-sm px-5 py-2.5 rounded-full transition-colors">
+      Lihat Direktori
+    </a>
+
+    <button id="menu-btn" aria-label="Buka menu" aria-expanded="false" class="lg:hidden p-2 text-cream">
+      <svg id="icon-open" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <svg id="icon-close" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="lg:hidden hidden bg-navy-950 border-t border-white/10">
+    <div class="px-6 py-5 flex flex-col gap-1 text-cream font-medium">
+      <a href="index.html" class="mobile-link py-3 border-b border-white/10" data-page="index">Beranda</a>
+      <a href="pages/tentang.html" class="mobile-link py-3 border-b border-white/10" data-page="tentang">Tentang</a>
+      <a href="pages/mahasiswa.html" class="mobile-link py-3 border-b border-white/10" data-page="mahasiswa">Direktori</a>
+      <a href="pages/timeline.html" class="mobile-link py-3 border-b border-white/10" data-page="timeline">Akademik</a>
+      <a href="pages/berita.html" class="mobile-link py-3 border-b border-white/10" data-page="berita">Berita</a>
+      <a href="pages/event.html" class="mobile-link py-3 border-b border-white/10" data-page="event">Event</a>
+      <a href="pages/galeri.html" class="mobile-link py-3" data-page="galeri">Galeri</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ============ HERO / LANDING ============ -->
+<section id="beranda" class="relative bg-navy-950 bg-topo overflow-hidden pt-32 pb-20 md:pt-44 md:pb-28">
+  <div class="absolute inset-0 bg-dotted opacity-40 pointer-events-none"></div>
+  <div class="absolute -bottom-1 inset-x-0 h-40 bg-gradient-to-t from-gold-500/10 to-transparent pointer-events-none"></div>
+
+  <div class="relative max-w-6xl mx-auto px-5 md:px-8 text-center">
+    <span class="inline-block font-mono text-xs tracking-[0.3em] text-gold-400 border border-gold-500/40 rounded-full px-4 py-1.5 mb-8">
+      REKAYASA SISTEM KOMPUTER · UNIVERSITAS TANJUNGPURA
+    </span>
+
+    <img src="assets/logo.png" width="50" height="50" alt="logo" class="block mx-auto mb-6 w-24 h-24 md:w-28 md:h-28">
+
+    <h1 class="font-display italic text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-cream leading-[1.08] mb-6">
+      Merangkai Mimpi,<br class="hidden sm:block"> Menembus <span class="text-gold-400 not-italic">SYNTERA</span>
+    </h1>
+    <p class="text-cream/70 max-w-2xl mx-auto text-base md:text-lg mb-10">
+      Kami adalah Angkatan 2025 — 114 mahasiswa dari empat kelas yang berlayar bersama menuju satu tujuan. tumbuh, berkarya, dan saling menguatkan sepanjang perjalanan akademik.
+    </p>
+
+    <div class="flex flex-wrap items-center justify-center gap-4 mb-16">
+      <a href="pages/mahasiswa.html" class="bg-gold-500 hover:bg-gold-400 text-navy-950 font-semibold px-7 py-3.5 rounded-full transition-colors">Lihat Direktori Mahasiswa</a>
+      <a href="pages/event.html" class="border border-cream/30 hover:border-gold-400 text-cream px-7 py-3.5 rounded-full transition-colors">Agenda Terdekat</a>
+    </div>
+
+  <!-- Departure board countdown -->
+  <div class="relative max-w-3xl mx-auto mt-20 px-5">
+    <div class="bg-navy-900 border border-gold-500/30 rounded-3xl px-6 py-8 md:px-10 md:py-10 shadow-2xl">
+      <div class="flex items-center justify-between mb-6">
+        <div class="text-left">
+          <p class="font-mono text-xs tracking-[0.25em] text-gold-400">EVENT TERDEKAT</p>
+          <p id="countdown-event-title" class="font-display text-xl md:text-2xl text-cream mt-1">
+            Diskusi Sistem Komputer
+          </p>
+        </div>
+        <span
+            id="countdown-event-date"
+            class="font-mono text-xs text-cream/50 hidden sm:block">
+            --
+        </span>
+      </div>
+
+      <div class="grid grid-cols-4 gap-2.5 md:gap-4" id="countdown">
+        <div class="text-center">
+          <div class="flap rounded-xl py-3 md:py-5"><span id="cd-days" class="font-mono text-2xl md:text-4xl font-bold text-gold-400">00</span></div>
+          <p class="font-mono text-[10px] md:text-xs text-cream/50 mt-2 tracking-widest">HARI</p>
+        </div>
+        <div class="text-center">
+          <div class="flap rounded-xl py-3 md:py-5"><span id="cd-hours" class="font-mono text-2xl md:text-4xl font-bold text-gold-400">00</span></div>
+          <p class="font-mono text-[10px] md:text-xs text-cream/50 mt-2 tracking-widest">JAM</p>
+        </div>
+        <div class="text-center">
+          <div class="flap rounded-xl py-3 md:py-5"><span id="cd-mins" class="font-mono text-2xl md:text-4xl font-bold text-gold-400">00</span></div>
+          <p class="font-mono text-[10px] md:text-xs text-cream/50 mt-2 tracking-widest">MENIT</p>
+        </div>
+        <div class="text-center">
+          <div class="flap rounded-xl py-3 md:py-5"><span id="cd-secs" class="font-mono text-2xl md:text-4xl font-bold text-gold-400">00</span></div>
+          <p class="font-mono text-[10px] md:text-xs text-cream/50 mt-2 tracking-widest">DETIK</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stat cards -->
+  <div class="relative max-w-6xl mx-auto mt-14 px-5 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+    <div class="reveal bg-cream/[0.04] border border-cream/10 rounded-2xl px-5 py-6 text-center backdrop-blur-sm">
+      <p class="font-mono text-3xl md:text-4xl font-bold text-gold-400" data-count="114">0</p>
+      <p class="text-cream/60 text-xs md:text-sm mt-2 tracking-wide">Mahasiswa</p>
+    </div>
+    <div class="reveal bg-cream/[0.04] border border-cream/10 rounded-2xl px-5 py-6 text-center backdrop-blur-sm">
+      <p class="font-mono text-3xl md:text-4xl font-bold text-gold-400" data-count="4">0</p>
+      <p class="text-cream/60 text-xs md:text-sm mt-2 tracking-wide">Kelas</p>
+    </div>
+    <div class="reveal bg-cream/[0.04] border border-cream/10 rounded-2xl px-5 py-6 text-center backdrop-blur-sm">
+      <p class="font-mono text-3xl md:text-4xl font-bold text-gold-400" data-count="0">0</p>
+      <p class="text-cream/60 text-xs md:text-sm mt-2 tracking-wide">Prestasi</p>
+    </div>
+    <div class="reveal bg-cream/[0.04] border border-cream/10 rounded-2xl px-5 py-6 text-center backdrop-blur-sm">
+      <p class="font-mono text-3xl md:text-4xl font-bold text-gold-400" data-count="0">0</p>
+      <p class="text-cream/60 text-xs md:text-sm mt-2 tracking-wide">Alumni</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Ringkasan navigasi ke halaman lain ============ -->
+<section class="py-24 md:py-28 bg-cream">
+  <div class="max-w-6xl mx-auto px-5 md:px-8">
+    <div class="max-w-2xl mb-14 reveal">
+      <p class="font-mono text-xs tracking-[0.25em] text-teal-700 mb-3">JELAJAHI</p>
+      <h2 class="font-display text-3xl md:text-5xl text-navy-950">Semua tentang angkatan, satu tempat</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <a href="pages/tentang.html" class="reveal card-hover block bg-white border border-navy-900/10 rounded-3xl p-7">
+        <h3 class="font-display text-xl text-navy-900 mb-2">Tentang Angkatan</h3>
+        <p class="text-ink/60 text-sm">Sejarah, filosofi logo, visi misi, dan struktur kepengurusan.</p>
+      </a>
+      <a href="pages/mahasiswa.html" class="reveal card-hover block bg-white border border-navy-900/10 rounded-3xl p-7">
+        <h3 class="font-display text-xl text-navy-900 mb-2">Direktori Mahasiswa</h3>
+        <p class="text-ink/60 text-sm">Cari dan kenali profil teman seangkatan berdasarkan kelas & minat.</p>
+      </a>
+      <a href="pages/timeline.html" class="reveal card-hover block bg-white border border-navy-900/10 rounded-3xl p-7">
+        <h3 class="font-display text-xl text-navy-900 mb-2">Timeline Akademik</h3>
+        <p class="text-ink/60 text-sm">Jadwal semester, UTS/UAS, praktikum, dan hari libur.</p>
+      </a>
+      <a href="pages/berita.html" class="reveal card-hover block bg-white border border-navy-900/10 rounded-3xl p-7">
+        <h3 class="font-display text-xl text-navy-900 mb-2">Berita & Pengumuman</h3>
+        <p class="text-ink/60 text-sm">Kabar terbaru seputar akademik, lomba, seminar, dan organisasi.</p>
+      </a>
+      <a href="pages/event.html" class="reveal card-hover block bg-white border border-navy-900/10 rounded-3xl p-7">
+        <h3 class="font-display text-xl text-navy-900 mb-2">Event & Kegiatan</h3>
+        <p class="text-ink/60 text-sm">Detail acara, lokasi, kuota peserta, dan form pendaftaran.</p>
+      </a>
+      <a href="pages/galeri.html" class="reveal card-hover block bg-white border border-navy-900/10 rounded-3xl p-7">
+        <h3 class="font-display text-xl text-navy-900 mb-2">Dokumentasi & Galeri</h3>
+        <p class="text-ink/60 text-sm">Foto dan video kegiatan, dikelompokkan per album.</p>
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- Back to top -->
+<button id="to-top" aria-label="Kembali ke atas" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-gold-500 hover:bg-gold-400 text-navy-950 shadow-xl flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 z-40">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+</button>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-navy-950 pt-16 pb-8">
+  <div class="max-w-6xl mx-auto px-5 md:px-8">
+    <div class="grid md:grid-cols-3 gap-10 mb-12">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <img src="assets/logo.png" alt="logo" class="w-10 h-10 object-contain">
+          <span class="font-display font-semibold text-lg text-cream">SYNTERA<span class="text-gold-400">'25</span></span>
+        </div>
+        <p class="text-cream/50 text-sm leading-relaxed max-w-xs">Program Studi Rekayasa Sistem Komputer, Universitas Tanjungpura. Merangkai mimpi, menembus syntera.</p>
+      </div>
+      <div>
+        <p class="font-mono text-xs tracking-widest text-gold-400 mb-4">JELAJAH</p>
+        <ul class="space-y-2.5 text-cream/60 text-sm">
+          <li><a href="pages/tentang.html" class="hover:text-gold-400">Tentang Angkatan</a></li>
+          <li><a href="pages/mahasiswa.html" class="hover:text-gold-400">Direktori Mahasiswa</a></li>
+          <li><a href="pages/timeline.html" class="hover:text-gold-400">Timeline Akademik</a></li>
+          <li><a href="pages/berita.html" class="hover:text-gold-400">Berita &amp; Pengumuman</a></li>
+          <li><a href="pages/galeri.html" class="hover:text-gold-400">Galeri</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-mono text-xs tracking-widest text-gold-400 mb-4">TERHUBUNG</p>
+        <div class="flex gap-3">
+        <a href="https://instagram.com/syntera_25"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-cream/70 transition">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+
+        <a href="https://github.com/USERNAME"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-cream/70 transition">
+          <i class="fa-brands fa-github"></i>
+        </a>
+
+        <a href="https://linkedin.com/in/USERNAME"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-cream/70 transition">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+      </div>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between gap-3 text-xs text-cream/40 font-mono">
+      <p>© 2026 Iqbal Firmansyah.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="js/data.js"></script>
+<script src="js/filter.js"></script>
+<script src="js/main.js"></script>
+
+<script src="js/event.js"></script>
+<script src="js/index.js"></script>
+
+</body>
+</html>

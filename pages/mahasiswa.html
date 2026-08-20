@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Direktori Mahasiswa — SYNTERA'25</title>
+<link rel="icon" href="../assets/logo.png"
+<meta name="description" content="Pencarian dan filter profil mahasiswa berdasarkan kelas & minat akan tampil di sini.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<!-- Tailwind (utility framework) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: { 950:'#0A1420', 900:'#0F1B2E', 800:'#16283F', 700:'#1E3550', 600:'#2A4766' },
+          gold: { 400:'#C7BBB2', 500:'#B4A59B', 600:'#9C8C82' },
+          teal: { 600:'#1B7A72', 700:'#155F59', 800:'#0F433F' },
+          cream: '#F7F4EC',
+          ink: '#16202E',
+          coral: '#C1502E',
+        },
+        fontFamily: {
+          display: ['Fraunces','serif'],
+          body: ['"Plus Jakarta Sans"','sans-serif'],
+          mono: ['"JetBrains Mono"','monospace'],
+        },
+      }
+    }
+  }
+</script>
+
+<link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="antialiased" data-page="mahasiswa">
+
+<div id="horizon-progress"></div>
+
+<!-- ============ NAVBAR ============ -->
+<header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-colors duration-300">
+  <nav class="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between h-20">
+    <a href="index.html" class="flex items-center gap-3 group">
+      <img src="../assets/logo.png" width="50" height="50" alt="logo">
+      <span class="font-display font-semibold text-lg md:text-xl tracking-wide text-cream">SYNTERA<span class="text-gold-400">'25</span></span>
+    </a>
+
+    <div class="hidden lg:flex items-center gap-9 font-medium text-sm text-cream/90">
+      <a href="../index.html" class="nav-link" data-page="index">Beranda</a>
+      <a href="../pages/tentang.html" class="nav-link" data-page="tentang">Tentang</a>
+      <a href="../pages/mahasiswa.html" class="nav-link active" data-page="mahasiswa">Direktori</a>
+      <a href="../pages/timeline.html" class="nav-link" data-page="timeline">Akademik</a>
+      <a href="../pages/berita.html" class="nav-link" data-page="berita">Berita</a>
+      <a href="../pages/event.html" class="nav-link" data-page="event">Event</a>
+      <a href="../pages/galeri.html" class="nav-link" data-page="galeri">Galeri</a>
+    </div>
+
+    <a href="../pages/mahasiswa.html" class="hidden lg:inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-400 text-navy-950 font-semibold text-sm px-5 py-2.5 rounded-full transition-colors">
+      Lihat Direktori
+    </a>
+
+    <button id="menu-btn" aria-label="Buka menu" aria-expanded="false" class="lg:hidden p-2 text-cream">
+      <svg id="icon-open" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <svg id="icon-close" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="lg:hidden hidden bg-navy-950 border-t border-white/10">
+    <div class="px-6 py-5 flex flex-col gap-1 text-cream font-medium">
+      <a href="../index.html" class="mobile-link py-3 border-b border-white/10" data-page="index">Beranda</a>
+      <a href="tentang.html" class="mobile-link py-3 border-b border-white/10" data-page="tentang">Tentang</a>
+      <a href="mahasiswa.html" class="mobile-link py-3 border-b border-white/10" data-page="mahasiswa">Direktori</a>
+      <a href="timeline.html" class="mobile-link py-3 border-b border-white/10" data-page="timeline">Akademik</a>
+      <a href="berita.html" class="mobile-link py-3 border-b border-white/10" data-page="berita">Berita</a>
+      <a href="event.html" class="mobile-link py-3 border-b border-white/10" data-page="event">Event</a>
+      <a href="galeri.html" class="mobile-link py-3 border-b border-white/10 border-b-0" data-page="galeri">Galeri</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- ========================================================= -->
+<!-- HERO -->
+<!-- ========================================================= -->
+
+<section class="relative overflow-hidden bg-navy-950 pt-36 pb-44">
+
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 bg-dotted opacity-20"></div>
+
+    <!-- Gradient -->
+    <div
+        class="absolute inset-0
+        bg-gradient-to-br
+        from-navy-950
+        via-[#13263C]
+        to-[#1B3858]">
+    </div>
+
+    <!-- Glow -->
+    <div
+        class="absolute -top-32 -left-20
+        w-[500px] h-[500px]
+        bg-[#B4A59B]/15
+        blur-[140px]
+        rounded-full">
+    </div>
+
+    <div
+        class="absolute bottom-0 right-0
+        w-[500px] h-[500px]
+        bg-teal-600/10
+        blur-[150px]
+        rounded-full">
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-5 md:px-8">
+
+        <div class="grid lg:grid-cols-2 gap-20 items-center">
+
+            <!-- ===================== -->
+            <!-- TEXT -->
+            <!-- ===================== -->
+
+            <div class="reveal">
+
+                <span
+                    class="inline-flex items-center gap-2
+                    px-5 py-2
+                    rounded-full
+                    border border-gold-500/30
+                    bg-white/5
+                    backdrop-blur-md
+                    text-gold-400
+                    tracking-[0.3em]
+                    text-xs">
+
+                    DIREKTORI MAHASASISWA
+
+                </span>
+
+                <h1
+                    class="font-display
+                    text-5xl
+                    md:text-7xl
+                    text-cream
+                    leading-tight
+                    mt-8">
+
+                    Temukan Seluruh
+
+                    <span class="text-gold-400">
+
+                        Mahasiswa
+
+                    </span>
+
+                    SYNTERA'25
+
+                </h1>
+
+                <p
+                    class="text-cream/70
+                    text-lg
+                    leading-9
+                    mt-8
+                    max-w-xl">
+
+                    Direktori resmi mahasiswa
+                    Rekayasa Sistem Komputer
+                    Angkatan 2025 Universitas Tanjungpura.
+
+                    Cari teman, lihat profil singkat,
+                    dan terhubung melalui media sosial.
+
+                </p>
+
+                <div class="flex gap-5 mt-10">
+
+                    <a
+                        href="#studentGrid"
+                        class="px-8 py-4
+                        rounded-full
+                        bg-gold-500
+                        hover:bg-gold-400
+                        transition
+                        text-navy-950
+                        font-semibold">
+
+                        Lihat Mahasiswa
+
+                    </a>
+
+                    <a
+                        href="../index.html"
+                        class="px-8 py-4
+                        rounded-full
+                        border
+                        border-white/20
+                        hover:border-gold-500
+                        text-cream
+                        transition">
+
+                        Kembali
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- ===================== -->
+            <!-- ILUSTRASI -->
+            <!-- ===================== -->
+
+            <div
+                class="hidden lg:flex justify-center reveal">
+
+                <div
+                    class="relative
+                    w-[480px]
+                    h-[480px]">
+
+                    <!-- Ring -->
+
+                    <div
+                        class="absolute inset-0
+                        rounded-full
+                        border
+                        border-gold-500/20">
+                    </div>
+
+                    <div
+                        class="absolute
+                        inset-8
+                        rounded-full
+                        border
+                        border-gold-500/15">
+                    </div>
+
+                    <div
+                        class="absolute
+                        inset-16
+                        rounded-full
+                        border
+                        border-gold-500/10">
+                    </div>
+
+                    <!-- Logo -->
+
+                    <div
+                        class="absolute
+                        inset-0
+                        flex
+                        items-center
+                        justify-center">
+
+                        <img
+
+                            src="../assets/logo.png"
+
+                            class="w-52 drop-shadow-2xl"
+
+                            alt="Logo">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- STATISTIK -->
+<!-- ========================================================= -->
+
+<section class="relative bg-white py-16">
+
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+
+            <div class="bg-cream rounded-3xl p-8 text-center card-hover reveal">
+
+                <div
+                    id="total-count"
+                    class="text-5xl font-bold text-gold-500">
+
+                    0
+
+                </div>
+
+                <p class="mt-4 text-gray-600">
+
+                    Total Mahasiswa
+
+                </p>
+
+            </div>
+
+            <div class="bg-cream rounded-3xl p-8 text-center card-hover reveal">
+
+                <div
+                    class="text-5xl font-bold text-gold-500"
+                    id="male-count">
+
+                    0
+
+                </div>
+
+                <p class="mt-4 text-gray-600">
+
+                    Laki-laki
+
+                </p>
+
+            </div>
+
+            <div class="bg-cream rounded-3xl p-8 text-center card-hover reveal">
+
+                <div
+                    class="text-5xl font-bold text-gold-500"
+                    id="female-count">
+
+                    0
+
+                </div>
+
+                <p class="mt-4 text-gray-600">
+
+                    Perempuan
+
+                </p>
+
+            </div>
+
+            <div class="bg-cream rounded-3xl p-8 text-center card-hover reveal">
+
+                <div
+                    class="text-5xl font-bold text-gold-500"
+                    id="pengurus-count">
+
+                    0
+
+                </div>
+
+                <p class="mt-4 text-gray-600">
+
+                    Pengurus
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- SEARCH -->
+<!-- ========================================================= -->
+
+<section class="pb-10 bg-white">
+
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+
+    <div class="bg-cream rounded-[32px] p-6 md:p-8 reveal">
+
+        <div class="search-filter-wrapper">
+
+            <!-- SEARCH -->
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    id="searchInput"
+                    type="text"
+                    placeholder="Cari nama mahasiswa..."
+                    autocomplete="off">
+
+            </div>
+
+
+            <!-- FILTER -->
+            <div class="filter-box">
+
+                <button
+                    class="filter-chip chip active"
+                    data-filter="all">
+                    Semua
+                </button>
+
+                <button
+                    class="filter-chip chip"
+                    data-filter="male">
+                    Laki-laki
+                </button>
+
+                <button
+                    class="filter-chip chip"
+                    data-filter="female">
+                    Perempuan
+                </button>
+
+                <button
+                    class="filter-chip chip"
+                    data-filter="pengurus">
+                    Pengurus
+                </button>
+
+                <button
+                    class="filter-chip chip"
+                    data-filter="az">
+                    A-Z
+                </button>
+
+                <button
+                    class="filter-chip chip"
+                    data-filter="za">
+                    Z-A
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- GRID MAHASISWA -->
+<!-- ========================================================= -->
+
+<section class="pb-24 bg-white">
+
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+
+        <div
+            id="studentGrid"
+            class="grid
+            sm:grid-cols-2
+            lg:grid-cols-3
+            xl:grid-cols-4
+            gap-8">
+
+        </div>
+
+        <div
+            id="emptyState"
+            class="hidden
+            text-center
+            py-24">
+
+            <div
+                class="inline-flex
+                items-center
+                justify-center
+                w-28
+                h-28
+                rounded-full
+                bg-cream
+                mb-8">
+
+                <i class="fa-solid fa-user-slash text-5xl text-gold-500"></i>
+
+            </div>
+
+            <h3 class="font-display text-4xl text-navy-950">
+
+                Mahasiswa Tidak Ditemukan
+
+            </h3>
+
+            <p class="mt-4 text-gray-500">
+
+                Coba gunakan kata kunci lain.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+</main>
+
+<button id="to-top" aria-label="Kembali ke atas" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-gold-500 hover:bg-gold-400 text-navy-950 shadow-xl flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 z-40">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+</button>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-navy-950 pt-16 pb-8">
+  <div class="max-w-6xl mx-auto px-5 md:px-8">
+    <div class="grid md:grid-cols-3 gap-10 mb-12">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <img src="../assets/logo.png" alt="logo" class="w-10 h-10 object-contain">
+          <span class="font-display font-semibold text-lg text-cream">SYNTERA<span class="text-gold-400">'25</span></span>
+        </div>
+        <p class="text-cream/50 text-sm leading-relaxed max-w-xs">Program Studi Rekayasa Sistem Komputer, Universitas Tanjungpura. Merangkai mimpi, menembus syntera.</p>
+      </div>
+      <div>
+        <p class="font-mono text-xs tracking-widest text-gold-400 mb-4">JELAJAH</p>
+        <ul class="space-y-2.5 text-cream/60 text-sm">
+          <li><a href="pages/tentang.html" class="hover:text-gold-400">Tentang Angkatan</a></li>
+          <li><a href="pages/mahasiswa.html" class="hover:text-gold-400">Direktori Mahasiswa</a></li>
+          <li><a href="pages/timeline.html" class="hover:text-gold-400">Timeline Akademik</a></li>
+          <li><a href="pages/berita.html" class="hover:text-gold-400">Berita &amp; Pengumuman</a></li>
+          <li><a href="pages/galeri.html" class="hover:text-gold-400">Galeri</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-mono text-xs tracking-widest text-gold-400 mb-4">TERHUBUNG</p>
+        <div class="flex gap-3">
+          <a href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-cream/70"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 3.25.15 4.77 1.7 4.92 4.92.06 1.27.07 1.6.07 4.81s-.01 3.54-.07 4.81c-.15 3.22-1.66 4.77-4.92 4.92-1.27.06-1.6.07-4.9.07s-3.6-.01-4.9-.07c-3.26-.15-4.77-1.71-4.92-4.92-.06-1.27-.07-1.6-.07-4.81s.02-3.54.07-4.81C2.33 3.97 3.85 2.42 7.1 2.27 8.4 2.2 8.8 2.2 12 2.2zm0 3.3a6.5 6.5 0 100 13 6.5 6.5 0 000-13zm0 10.7a4.2 4.2 0 110-8.4 4.2 4.2 0 010 8.4zm6.8-10.96a1.52 1.52 0 11-3.04 0 1.52 1.52 0 013.04 0z"/></svg></a>
+          <a href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-cream/70"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.5 0-.24-.01-.87-.01-1.71-2.78.62-3.37-1.37-3.37-1.37-.46-1.2-1.11-1.52-1.11-1.52-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.9 1.58 2.34 1.12 2.91.86.09-.67.35-1.12.64-1.38-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.72 0 0 .84-.28 2.75 1.05a9.3 9.3 0 015 0c1.9-1.33 2.74-1.05 2.74-1.05.56 1.41.21 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .28.18.6.69.5A10.26 10.26 0 0022 12.25C22 6.58 17.52 2 12 2z"/></svg></a>
+          <a href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-cream/70"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 110-4.13 2.07 2.07 0 010 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between gap-3 text-xs text-cream/40 font-mono">
+      <p>© 2026 Iqbal Firmansyah.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/data.js"></script>
+<script src="../js/mahasiswa.js"></script>
+<script src="../js/filter.js"></script>
+<script src="../js/main.js"></script>
+
+
+</body>
+</html>

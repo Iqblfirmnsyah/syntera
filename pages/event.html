@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timeline Akademik — SYNTERA'25</title>
+<link rel="icon" href="../assets/logo.png"
+<meta name="description" content="Pencarian dan filter profil mahasiswa berdasarkan kelas & minat akan tampil di sini.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<!-- Tailwind (utility framework) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: { 950:'#0A1420', 900:'#0F1B2E', 800:'#16283F', 700:'#1E3550', 600:'#2A4766' },
+          gold: { 400:'#C7BBB2', 500:'#B4A59B', 600:'#9C8C82' },
+          teal: { 600:'#1B7A72', 700:'#155F59', 800:'#0F433F' },
+          cream: '#F7F4EC',
+          ink: '#16202E',
+          coral: '#C1502E',
+        },
+        fontFamily: {
+          display: ['Fraunces','serif'],
+          body: ['"Plus Jakarta Sans"','sans-serif'],
+          mono: ['"JetBrains Mono"','monospace'],
+        },
+      }
+    }
+  }
+</script>
+
+<link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="antialiased" data-page="event">
+
+<div id="horizon-progress"></div>
+
+<!-- ============ NAVBAR ============ -->
+<header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-colors duration-300">
+  <nav class="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between h-20">
+    <a href="index.html" class="flex items-center gap-3 group">
+      <img src="../assets/logo.png" width="50" height="50" alt="logo">
+      <span class="font-display font-semibold text-lg md:text-xl tracking-wide text-cream">SYNTERA<span class="text-gold-400">'25</span></span>
+    </a>
+
+    <div class="hidden lg:flex items-center gap-9 font-medium text-sm text-cream/90">
+      <a href="../index.html" class="nav-link" data-page="index">Beranda</a>
+      <a href="../pages/tentang.html" class="nav-link" data-page="tentang">Tentang</a>
+      <a href="../pages/mahasiswa.html" class="nav-link" data-page="mahasiswa">Direktori</a>
+      <a href="../pages/timeline.html" class="nav-link" data-page="timeline">Akademik</a>
+      <a href="../pages/berita.html" class="nav-link" data-page="berita">Berita</a>
+      <a href="../pages/event.html" class="nav-link active" data-page="event">Event</a>
+      <a href="../pages/galeri.html" class="nav-link" data-page="galeri">Galeri</a>
+    </div>
+
+    <a href="../pages/mahasiswa.html" class="hidden lg:inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-400 text-navy-950 font-semibold text-sm px-5 py-2.5 rounded-full transition-colors">
+      Lihat Direktori
+    </a>
+
+    <button id="menu-btn" aria-label="Buka menu" aria-expanded="false" class="lg:hidden p-2 text-cream">
+      <svg id="icon-open" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <svg id="icon-close" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="lg:hidden hidden bg-navy-950 border-t border-white/10">
+    <div class="px-6 py-5 flex flex-col gap-1 text-cream font-medium">
+      <a href="../index.html" class="mobile-link py-3 border-b border-white/10" data-page="index">Beranda</a>
+      <a href="tentang.html" class="mobile-link py-3 border-b border-white/10" data-page="tentang">Tentang</a>
+      <a href="mahasiswa.html" class="mobile-link py-3 border-b border-white/10" data-page="mahasiswa">Direktori</a>
+      <a href="timeline.html" class="mobile-link py-3 border-b border-white/10" data-page="timeline">Akademik</a>
+      <a href="berita.html" class="mobile-link py-3 border-b border-white/10" data-page="berita">Berita</a>
+      <a href="event.html" class="mobile-link py-3 border-b border-white/10" data-page="event">Event</a>
+      <a href="galeri.html" class="mobile-link py-3 border-b border-white/10 border-b-0" data-page="galeri">Galeri</a>
+    </div>
+  </div>
+</header>
+
+<main>
+    <!-- =====================================================
+         HERO EVENT
+    ====================================================== -->
+
+    <section class="relative overflow-hidden bg-navy-950 text-white">
+
+        <div class="absolute inset-0 pointer-events-none">
+
+            <div
+                class="absolute -top-32 -right-32
+                w-96 h-96
+                rounded-full
+                bg-gold-500/10
+                blur-3xl">
+            </div>
+
+            <div
+                class="absolute -bottom-40 -left-32
+                w-96 h-96
+                rounded-full
+                bg-teal-700/20
+                blur-3xl">
+            </div>
+
+        </div>
+
+        <div
+            class="relative
+            max-w-7xl
+            mx-auto
+            px-5
+            md:px-8
+            pt-28
+            pb-24">
+
+            <div class="max-w-4xl">
+
+                <div
+                    class="inline-flex
+                    items-center
+                    gap-3
+                    px-5
+                    py-3
+                    rounded-full
+                    bg-white/10
+                    border
+                    border-white/10
+                    backdrop-blur-sm
+                    reveal">
+
+                    <span
+                        class="w-2
+                        h-2
+                        rounded-full
+                        bg-gold-500">
+                    </span>
+
+                    <span
+                        class="font-mono
+                        text-xs
+                        tracking-[0.25em]
+                        uppercase
+                        text-gold-400">
+
+                        Event & Activities
+
+                    </span>
+
+                </div>
+
+
+                <h1
+                    class="mt-8
+                    font-display
+                    text-6xl
+                    md:text-7xl
+                    lg:text-8xl
+                    leading-[0.95]
+                    reveal">
+
+                    Momen
+                    <span class="text-gold-400">
+                        Bersama
+                    </span>
+
+                    <br>
+
+                    SYNTERA'25
+
+                </h1>
+
+
+                <p
+                    class="mt-8
+                    max-w-2xl
+                    text-lg
+                    md:text-xl
+                    leading-relaxed
+                    text-white/65
+                    reveal">
+
+                    Temukan berbagai kegiatan, agenda, dan momen
+                    kebersamaan mahasiswa Rekayasa Sistem Komputer
+                    Angkatan 2025.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         UPCOMING EVENT
+    ====================================================== -->
+
+    <section class="py-24 bg-cream">
+
+        <div
+            class="max-w-7xl
+            mx-auto
+            px-5
+            md:px-8">
+
+            <!-- Heading -->
+
+            <div
+                class="flex
+                flex-col
+                md:flex-row
+                md:items-end
+                md:justify-between
+                gap-6
+                reveal">
+
+                <div>
+
+                    <p
+                        class="font-mono
+                        text-xs
+                        tracking-[0.25em]
+                        uppercase
+                        text-teal-600">
+
+                        01 / Upcoming
+
+                    </p>
+
+                    <h2
+                        class="mt-4
+                        font-display
+                        text-5xl
+                        md:text-6xl
+                        text-navy-950">
+
+                        Event Terdekat
+
+                    </h2>
+
+                </div>
+
+                <p
+                    class="max-w-md
+                    text-gray-500
+                    leading-relaxed">
+
+                    Jangan lewatkan kegiatan dan agenda
+                    yang akan datang bersama SYNTERA'25.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- Featured Event -->
+
+            <div
+                class="mt-12
+                grid
+                lg:grid-cols-[1.3fr_.7fr]
+                gap-6
+                reveal">
+
+
+                <!-- Event Image -->
+
+                <div
+                    class="relative
+                    min-h-[420px]
+                    overflow-hidden
+                    rounded-[32px]
+                    bg-navy-900">
+
+                    <img
+                        id="upcoming-event-image"
+                        src="../assets/img/event/upcoming.jpg"
+                        alt="Upcoming Event SYNTERA'25"
+                        class="absolute inset-0 w-full h-full object-cover">
+
+                    <div
+                        class="absolute
+                        inset-0
+                        bg-gradient-to-t
+                        from-navy-950
+                        via-navy-950/40
+                        to-transparent">
+                    </div>
+
+
+                    <div
+                        class="absolute
+                        left-8
+                        right-8
+                        bottom-8
+                        text-white">
+
+                        <span
+                            class="inline-flex
+                            px-4
+                            py-2
+                            rounded-full
+                            bg-gold-500
+                            text-white
+                            text-xs
+                            font-bold">
+
+                            UPCOMING
+
+                        </span>
+
+
+                        <h3
+                            id="upcoming-event-title"
+                            class="mt-5 font-display text-4xl md:text-5xl">
+
+                            Memuat event...
+
+                        </h3>
+
+                        <p
+                            id="upcoming-event-description"
+                            class="mt-3 max-w-xl text-white/70">
+
+                            Memuat informasi event...
+
+                        </p>
+
+
+                        <p
+                            class="mt-3
+                            max-w-xl
+                            text-white/70">
+
+                            Deskripsi singkat mengenai event
+                            yang akan dilaksanakan.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Event Information -->
+
+                <div
+                    class="rounded-[32px]
+                    bg-white
+                    p-8
+                    md:p-10
+                    flex
+                    flex-col
+                    justify-between
+                    shadow-sm">
+
+                    <div>
+
+                        <p
+                            class="font-mono
+                            text-xs
+                            tracking-[0.2em]
+                            uppercase
+                            text-gray-400">
+
+                            Event Details
+
+                        </p>
+
+
+                        <div class="mt-8 space-y-6">
+
+
+                            <div
+                                class="flex
+                                items-center
+                                gap-4">
+
+                                <div
+                                    class="w-12
+                                    h-12
+                                    shrink-0
+                                    rounded-2xl
+                                    bg-cream
+                                    flex
+                                    items-center
+                                    justify-center">
+
+                                    <i
+                                        class="fa-regular
+                                        fa-calendar
+                                        text-gold-500">
+                                    </i>
+
+                                </div>
+
+                                <div>
+
+                                    <p class="text-xs text-gray-400">
+                                        Tanggal
+                                    </p>
+
+                                    <p
+                                        id="upcoming-event-date"
+                                        class="mt-1 font-semibold text-navy-950">
+
+                                        --
+
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div
+                                class="flex
+                                items-center
+                                gap-4">
+
+                                <div
+                                    class="w-12
+                                    h-12
+                                    shrink-0
+                                    rounded-2xl
+                                    bg-cream
+                                    flex
+                                    items-center
+                                    justify-center">
+
+                                    <i
+                                        class="fa-regular
+                                        fa-clock
+                                        text-gold-500">
+                                    </i>
+
+                                </div>
+
+                                <div>
+
+                                    <p class="text-xs text-gray-400">
+                                        Waktu
+                                    </p>
+
+                                    <p
+                                        id="upcoming-event-time"
+                                        class="mt-1 font-semibold text-navy-950">
+
+                                        --
+
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div
+                                class="flex
+                                items-center
+                                gap-4">
+
+                                <div
+                                    class="w-12
+                                    h-12
+                                    shrink-0
+                                    rounded-2xl
+                                    bg-cream
+                                    flex
+                                    items-center
+                                    justify-center">
+
+                                    <i
+                                        class="fa-solid
+                                        fa-location-dot
+                                        text-gold-500">
+                                    </i>
+
+                                </div>
+
+                                <div>
+
+                                    <p class="text-xs text-gray-400">
+                                        Lokasi
+                                    </p>
+
+                                    <p
+                                        id="upcoming-event-location"
+                                        class="mt-1 font-semibold text-navy-950">
+
+                                        --
+
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="#"
+                        class="mt-10
+                        inline-flex
+                        items-center
+                        justify-center
+                        gap-3
+                        rounded-2xl
+                        bg-navy-950
+                        px-6
+                        py-4
+                        text-white
+                        font-semibold
+                        transition
+                        hover:bg-navy-800
+                        hover:-translate-y-1">
+
+                        Lihat Detail
+
+                        <i
+                            class="fa-solid
+                            fa-arrow-right">
+                        </i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- =====================================================
+     EVENT LIST
+====================================================== -->
+
+<section class="py-24 bg-white">
+
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+
+        <!-- HEADER -->
+
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 reveal">
+
+            <div>
+
+                <p
+                    class="font-mono
+                    text-xs
+                    tracking-[0.25em]
+                    uppercase
+                    text-teal-600">
+
+                    02 / Activities
+
+                </p>
+
+                <h2
+                    class="mt-4
+                    font-display
+                    text-5xl
+                    md:text-6xl
+                    text-navy-950">
+
+                    Kegiatan SYNTERA'25
+
+                </h2>
+
+            </div>
+
+            <p
+                class="max-w-md
+                text-gray-500
+                leading-relaxed">
+
+                Berbagai kegiatan yang menjadi bagian dari
+                perjalanan dan kebersamaan SYNTERA'25.
+
+            </p>
+
+        </div>
+
+
+        <!-- EVENT GRID -->
+
+        <div
+            id="eventGrid"
+            class="mt-12
+            grid
+            md:grid-cols-2
+            lg:grid-cols-3
+            gap-7">
+
+        </div>
+
+
+        <!-- EMPTY STATE -->
+
+        <div
+            id="eventEmpty"
+            class="hidden
+            text-center
+            py-20">
+
+            <div
+                class="w-20
+                h-20
+                mx-auto
+                rounded-full
+                bg-cream
+                flex
+                items-center
+                justify-center">
+
+                <i
+                    class="fa-regular
+                    fa-calendar-xmark
+                    text-3xl
+                    text-gold-500">
+                </i>
+
+            </div>
+
+            <h3
+                class="mt-6
+                font-display
+                text-3xl
+                text-navy-950">
+
+                Belum Ada Event
+
+            </h3>
+
+            <p
+                class="mt-3
+                text-gray-500">
+
+                Event akan ditambahkan di sini.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     EVENT HISTORY
+====================================================== -->
+
+<section class="py-24 bg-cream">
+
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+
+        <div class="reveal">
+
+            <p
+                class="font-mono
+                text-xs
+                tracking-[0.25em]
+                uppercase
+                text-teal-600">
+
+                03 / Archive
+
+            </p>
+
+            <h2
+                class="mt-4
+                font-display
+                text-5xl
+                md:text-6xl
+                text-navy-950">
+
+                Riwayat Kegiatan
+
+            </h2>
+
+        </div>
+
+
+        <div
+            id="eventArchive"
+            class="mt-12
+            grid
+            md:grid-cols-2
+            lg:grid-cols-3
+            gap-7">
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+<button id="to-top" aria-label="Kembali ke atas" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-gold-500 hover:bg-gold-400 text-navy-950 shadow-xl flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 z-40">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+</button>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-navy-950 pt-16 pb-8">
+  <div class="max-w-6xl mx-auto px-5 md:px-8">
+    <div class="grid md:grid-cols-3 gap-10 mb-12">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <img src="../assets/logo.png" alt="logo" class="w-10 h-10 object-contain">
+          <span class="font-display font-semibold text-lg text-cream">SYNTERA<span class="text-gold-400">'25</span></span>
+        </div>
+        <p class="text-cream/50 text-sm leading-relaxed max-w-xs">Program Studi Rekayasa Sistem Komputer, Universitas Tanjungpura. Merangkai mimpi, menembus syntera.</p>
+      </div>
+      <div>
+        <p class="font-mono text-xs tracking-widest text-gold-400 mb-4">JELAJAH</p>
+        <ul class="space-y-2.5 text-cream/60 text-sm">
+          <li><a href="pages/tentang.html" class="hover:text-gold-400">Tentang Angkatan</a></li>
+          <li><a href="pages/mahasiswa.html" class="hover:text-gold-400">Direktori Mahasiswa</a></li>
+          <li><a href="pages/timeline.html" class="hover:text-gold-400">Timeline Akademik</a></li>
+          <li><a href="pages/berita.html" class="hover:text-gold-400">Berita &amp; Pengumuman</a></li>
+          <li><a href="pages/galeri.html" class="hover:text-gold-400">Galeri</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-mono text-xs tracking-widest text-gold-400 mb-4">TERHUBUNG</p>
+        <div class="flex gap-3">
+        <a href="https://instagram.com/syntera_25"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-cream/70 transition">
+            <i class="fa-brands fa-instagram"></i>
+        </a>
+
+        <a href="https://github.com/USERNAME"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-cream/70 transition">
+            <i class="fa-brands fa-github"></i>
+        </a>
+
+        <a href="https://linkedin.com/in/USERNAME"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-cream/70 transition">
+            <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between gap-3 text-xs text-cream/40 font-mono">
+      <p>© 2026 Iqbal Firmansyah.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/data.js"></script>
+<script src="../js/filter.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/event.js"></script>
+</body>
+</html>

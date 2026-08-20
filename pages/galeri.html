@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Direktori Mahasiswa — SYNTERA'25</title>
+<link rel="icon" href="../assets/logo.png"
+<meta name="description" content="Pencarian dan filter profil mahasiswa berdasarkan kelas & minat akan tampil di sini.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<!-- Tailwind (utility framework) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          navy: { 950:'#0A1420', 900:'#0F1B2E', 800:'#16283F', 700:'#1E3550', 600:'#2A4766' },
+          gold: { 400:'#C7BBB2', 500:'#B4A59B', 600:'#9C8C82' },
+          teal: { 600:'#1B7A72', 700:'#155F59', 800:'#0F433F' },
+          cream: '#F7F4EC',
+          ink: '#16202E',
+          coral: '#C1502E',
+        },
+        fontFamily: {
+          display: ['Fraunces','serif'],
+          body: ['"Plus Jakarta Sans"','sans-serif'],
+          mono: ['"JetBrains Mono"','monospace'],
+        },
+      }
+    }
+  }
+</script>
+
+<link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="antialiased" data-page="galeri">
+
+<div id="horizon-progress"></div>
+
+<!-- ============ NAVBAR ============ -->
+<header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-colors duration-300">
+  <nav class="max-w-7xl mx-auto px-5 md:px-8 flex items-center justify-between h-20">
+    <a href="index.html" class="flex items-center gap-3 group">
+      <img src="../assets/logo.png" width="50" height="50" alt="logo">
+      <span class="font-display font-semibold text-lg md:text-xl tracking-wide text-cream">SYNTERA<span class="text-gold-400">'25</span></span>
+    </a>
+
+    <div class="hidden lg:flex items-center gap-9 font-medium text-sm text-cream/90">
+      <a href="../index.html" class="nav-link" data-page="index">Beranda</a>
+      <a href="../pages/tentang.html" class="nav-link" data-page="tentang">Tentang</a>
+      <a href="../pages/mahasiswa.html" class="nav-link" data-page="mahasiswa">Direktori</a>
+      <a href="../pages/timeline.html" class="nav-link" data-page="timeline">Akademik</a>
+      <a href="../pages/berita.html" class="nav-link" data-page="berita">Berita</a>
+      <a href="../pages/event.html" class="nav-link" data-page="event">Event</a>
+      <a href="../pages/galeri.html" class="nav-link active" data-page="galeri">Galeri</a>
+    </div>
+
+    <a href="../pages/mahasiswa.html" class="hidden lg:inline-flex items-center gap-2 bg-gold-500 hover:bg-gold-400 text-navy-950 font-semibold text-sm px-5 py-2.5 rounded-full transition-colors">
+      Lihat Direktori
+    </a>
+
+    <button id="menu-btn" aria-label="Buka menu" aria-expanded="false" class="lg:hidden p-2 text-cream">
+      <svg id="icon-open" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      <svg id="icon-close" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="lg:hidden hidden bg-navy-950 border-t border-white/10">
+    <div class="px-6 py-5 flex flex-col gap-1 text-cream font-medium">
+      <a href="../index.html" class="mobile-link py-3 border-b border-white/10" data-page="index">Beranda</a>
+      <a href="tentang.html" class="mobile-link py-3 border-b border-white/10" data-page="tentang">Tentang</a>
+      <a href="mahasiswa.html" class="mobile-link py-3 border-b border-white/10" data-page="mahasiswa">Direktori</a>
+      <a href="timeline.html" class="mobile-link py-3 border-b border-white/10" data-page="timeline">Akademik</a>
+      <a href="berita.html" class="mobile-link py-3 border-b border-white/10" data-page="berita">Berita</a>
+      <a href="event.html" class="mobile-link py-3 border-b border-white/10" data-page="event">Event</a>
+      <a href="galeri.html" class="mobile-link py-3 border-b border-white/10 border-b-0" data-page="galeri">Galeri</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= HERO ================= -->
+  <section class="pt-40 pb-20 md:pt-48 md:pb-24 bg-navy-950 text-white">
+
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+
+      <div class="max-w-3xl reveal">
+
+        <p class="font-mono text-xs tracking-[0.25em] text-gold-400 mb-5">
+          01 / GALLERY
+        </p>
+
+        <h1 class="font-display text-4xl md:text-6xl leading-tight">
+          Cerita yang Tersimpan
+          <span class="block text-gold-400">dalam Bingkai.</span>
+        </h1>
+
+        <p class="mt-6 text-base md:text-lg leading-relaxed max-w-2xl">
+          Kumpulan momen, kegiatan, dan perjalanan
+          SYNTERA'25 yang diabadikan dalam satu ruang.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= FILTER ================= -->
+  <section class="bg-cream pt-10 pb-10">
+  <div class="max-w-7xl mx-auto px-5 md:px-8">
+    <div class="bg-white rounded-3xl p-5 md:p-6 shadow-sm reveal">
+
+        <div class="flex flex-col lg:flex-row gap-5 lg:items-center lg:justify-between">
+
+          <!-- SEARCH -->
+          <div class="relative flex-1 max-w-xl">
+
+            <i
+              class="fa-solid fa-magnifying-glass
+              absolute left-5 top-1/2 -translate-y-1/2
+              text-gray-400">
+            </i>
+
+            <input
+              id="gallerySearch"
+              type="text"
+              placeholder="Cari momen, kegiatan, atau album..."
+              class="
+                w-full
+                rounded-2xl
+                bg-cream
+                border border-transparent
+                pl-12 pr-5 py-4
+                outline-none
+                text-sm
+                focus:border-gold-500
+                transition
+              "
+            >
+
+          </div>
+
+
+          <!-- FILTER -->
+          <div
+            id="galleryFilters"
+            class="
+              flex
+              flex-wrap
+              gap-2
+            "
+          >
+
+            <button
+              class="gallery-filter active"
+              data-filter="all">
+              Semua
+            </button>
+
+            <button
+              class="gallery-filter"
+              data-filter="kegiatan">
+              Kegiatan
+            </button>
+
+            <button
+              class="gallery-filter"
+              data-filter="akademik">
+              Akademik
+            </button>
+
+            <button
+              class="gallery-filter"
+              data-filter="kebersamaan">
+              Kebersamaan
+            </button>
+
+            <button
+              class="gallery-filter"
+              data-filter="event">
+              Event
+            </button>
+
+            <button
+              class="gallery-filter"
+              data-filter="lainnya">
+              Lainnya
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= GALLERY ================= -->
+  <section class="bg-cream pb-28">
+
+    <div class="max-w-7xl mx-auto px-5 md:px-8">
+
+      <div
+        id="galleryGrid"
+        class="gallery-masonry"
+      >
+      </div>
+
+
+      <!-- EMPTY STATE -->
+      <div
+        id="galleryEmpty"
+        class="hidden text-center py-24"
+      >
+
+        <div
+          class="
+            inline-flex
+            items-center
+            justify-center
+            w-24 h-24
+            rounded-full
+            bg-white
+            mb-6
+          "
+        >
+
+          <i
+            class="fa-solid fa-images text-4xl text-gold-500">
+          </i>
+
+        </div>
+
+        <h3 class="font-display text-3xl text-navy-950">
+          Momen Tidak Ditemukan
+        </h3>
+
+        <p class="mt-3 text-gray-500">
+          Coba gunakan kata kunci atau kategori lain.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= LIGHTBOX ================= -->
+  <div
+    id="galleryLightbox"
+    class="
+      fixed inset-0
+      z-[100]
+      hidden
+      bg-navy-950/95
+      backdrop-blur-md
+      items-center
+      justify-center
+      p-5
+    "
+  >
+
+    <!-- CLOSE -->
+    <button
+      id="lightboxClose"
+      aria-label="Tutup"
+      class="
+        absolute
+        top-5 right-5
+        w-12 h-12
+        rounded-full
+        bg-white/10
+        hover:bg-white/20
+        text-white
+        flex items-center justify-center
+        transition
+        z-20
+      "
+    >
+
+      <i class="fa-solid fa-xmark text-xl"></i>
+
+    </button>
+
+
+    <!-- PREVIOUS -->
+    <button
+      id="lightboxPrev"
+      aria-label="Foto sebelumnya"
+      class="
+        absolute
+        left-4 md:left-8
+        top-1/2
+        -translate-y-1/2
+        w-12 h-12
+        rounded-full
+        bg-white/10
+        hover:bg-white/20
+        text-white
+        flex items-center justify-center
+        transition
+        z-20
+      "
+    >
+
+      <i class="fa-solid fa-chevron-left"></i>
+
+    </button>
+
+
+    <!-- CONTENT -->
+    <div
+      class="
+        relative
+        max-w-5xl
+        w-full
+        max-h-[90vh]
+        flex
+        flex-col
+        items-center
+      "
+    >
+
+      <img
+        id="lightboxImage"
+        src=""
+        alt=""
+        class="
+          max-w-full
+          max-h-[72vh]
+          object-contain
+          rounded-2xl
+          shadow-2xl
+        "
+      >
+
+
+      <div class="mt-5 text-center max-w-2xl">
+
+        <p
+          id="lightboxCategory"
+          class="
+            font-mono
+            text-[10px]
+            tracking-[0.25em]
+            text-gold-400
+            uppercase
+          "
+        >
+        </p>
+
+        <h3
+          id="lightboxTitle"
+          class="
+            font-display
+            text-2xl md:text-3xl
+            text-white
+            mt-2
+          "
+        >
+        </h3>
+
+        <p
+          id="lightboxDescription"
+          class="
+            text-sm
+            text-white/60
+            mt-2
+          "
+        >
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- NEXT -->
+    <button
+      id="lightboxNext"
+      aria-label="Foto berikutnya"
+      class="
+        absolute
+        right-4 md:right-8
+        top-1/2
+        -translate-y-1/2
+        w-12 h-12
+        rounded-full
+        bg-white/10
+        hover:bg-white/20
+        text-white
+        flex items-center justify-center
+        transition
+        z-20
+      "
+    >
+
+      <i class="fa-solid fa-chevron-right"></i>
+
+    </button>
+
+  </div>
+
+</main>
+
+<button id="to-top" aria-label="Kembali ke atas" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-gold-500 hover:bg-gold-400 text-navy-950 shadow-xl flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300 z-40">
+  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+</button>
+
+<!-- ============ FOOTER ============ -->
+<footer class="bg-navy-950 pt-16 pb-8">
+  <div class="max-w-6xl mx-auto px-5 md:px-8">
+    <div class="grid md:grid-cols-3 gap-10 mb-12">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <img src="../assets/logo.png" alt="logo" class="w-10 h-10 object-contain">
+          <span class="font-display font-semibold text-lg text-cream">SYNTERA<span class="text-gold-400">'25</span></span>
+        </div>
+        <p class="text-cream/50 text-sm leading-relaxed max-w-xs">Program Studi Rekayasa Sistem Komputer, Universitas Tanjungpura. Merangkai mimpi, menembus syntera.</p>
+      </div>
+      <div>
+        <p class="font-mono text-xs tracking-widest text-gold-400 mb-4">JELAJAH</p>
+        <ul class="space-y-2.5 text-cream/60 text-sm">
+          <li><a href="pages/tentang.html" class="hover:text-gold-400">Tentang Angkatan</a></li>
+          <li><a href="pages/mahasiswa.html" class="hover:text-gold-400">Direktori Mahasiswa</a></li>
+          <li><a href="pages/timeline.html" class="hover:text-gold-400">Timeline Akademik</a></li>
+          <li><a href="pages/berita.html" class="hover:text-gold-400">Berita &amp; Pengumuman</a></li>
+          <li><a href="pages/galeri.html" class="hover:text-gold-400">Galeri</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="font-mono text-xs tracking-widest text-gold-400 mb-4">TERHUBUNG</p>
+        <div class="flex gap-3">
+        <a href="https://instagram.com/syntera_25"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-cream/70 transition">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+
+        <a href="https://github.com/USERNAME"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-cream/70 transition">
+          <i class="fa-brands fa-github"></i>
+        </a>
+
+        <a href="https://linkedin.com/in/USERNAME"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-cream/70 transition">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+      </div>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between gap-3 text-xs text-cream/40 font-mono">
+      <p>© 2026 Iqbal Firmansyah.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/data.js"></script>
+<script src="../js/filter.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/galeri.js"></script>
+</body>
+</html>
