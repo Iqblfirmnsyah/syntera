@@ -22,9 +22,9 @@ const events = [
 
         category: "Internal",
 
-        date: "2026-10-10T19:30:00+07:00",
+        date: "2026-08-29T19:30:00+07:00",
 
-        dateText: "10 Oktober 2026",
+        dateText: "29 Agustus 2026",
 
         time: "12.30 WIB",
 
