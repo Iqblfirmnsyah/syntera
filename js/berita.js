@@ -12,7 +12,7 @@ const beritaData = [
         kategori: "kegiatan",
         tanggal: "16 Mei 2026",
         tanggalSort: "2026-05-16",
-        gambar: "../assets/img/berita/screen.jpg",
+        gambar: "../assets/img/berita/screen.JPG",
         deskripsi:
             "No deskripsi yet."
     },
