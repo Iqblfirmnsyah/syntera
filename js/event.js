@@ -26,7 +26,7 @@ const events = [
 
         dateText: "29 Agustus 2026",
 
-        time: "12.30 WIB",
+        time: "12.00 WIB",
 
         location: "Aula Gedung Resiskom",
 
@@ -34,7 +34,7 @@ const events = [
             "Kegiatan silaturrahmi dan ramah tamah antar masyarakat di lingkungan RESISKOM UNTAN.",
 
         image:
-            "../assets/img/event/sms.jpeg",
+            "../assets/img/event/sms2026.jpeg",
 
         status: "upcoming"
     },
