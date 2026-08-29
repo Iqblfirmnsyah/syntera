@@ -26,7 +26,18 @@ const beritaData = [
         gambar: "../assets/img/berita/raffi.jpeg",
         deskripsi:
             "No deskripsi yet."
-    }
+    },
+
+   {
+        id: 4,
+        judul: "Syntera in SMS 2026",
+        kategori: "kegiatan",
+        tanggal: "29 Agustus 2026",
+        tanggalSort: "2026-08-29",
+        gambar: "../assets/img/berita/sms2026.jpg",
+        deskripsi:
+            "SMS 2026 berjalan dengan sukses, keluarga syntera turut meramaikan kegiatan tersebut."
+   }
 
 ];
 
