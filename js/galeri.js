@@ -99,7 +99,15 @@ const galleryData = [
         title: "Syntera in Pesta Siskom 2026",
         category: "kegiatan",
         description: "Dokumentasi pada kegiatan pesta siskom 2026."
-    }
+    },
+
+   {
+        image: "../assets/img/galeri/sms2026.jpg",
+        title: "Syntera in SMS 2026",
+        category: "kebersamaan",
+        description: "Dokumentasi pada kegiatan pesta SMS 2026w."
+   }
+   
 
 ];
 
